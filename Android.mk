@@ -10,7 +10,8 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libcrypto_static
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/src/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/crypto-sources.mk
 LOCAL_SDK_VERSION := 9
 LOCAL_CFLAGS = -Wno-unused-parameter
@@ -28,7 +29,8 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libcrypto
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/src/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/crypto-sources.mk
 LOCAL_CFLAGS += -fvisibility=hidden -DBORINGSSL_SHARED_LIBRARY -DBORINGSSL_IMPLEMENTATION -Wno-unused-parameter
 LOCAL_SDK_VERSION := 9
@@ -56,33 +58,33 @@ LOCAL_SRC_FILES = $(tool_sources)
 include $(BUILD_EXECUTABLE)
 
 # Host static library
-include $(CLEAR_VARS)
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libcrypto_static
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/crypto-sources.mk
-LOCAL_CFLAGS = -Wno-unused-parameter
+#include $(CLEAR_VARS)
+#LOCAL_MODULE_TAGS := optional
+#LOCAL_MODULE := libcrypto_static
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+#LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/crypto-sources.mk
+#LOCAL_CFLAGS = -Wno-unused-parameter
 # Windows and Macs both have problems with assembly files
-ifneq ($(HOST_OS),linux)
-LOCAL_CFLAGS += -DOPENSSL_NO_ASM
-endif
-include $(LOCAL_PATH)/crypto-sources.mk
-include $(BUILD_HOST_STATIC_LIBRARY)
+#ifneq ($(HOST_OS),linux)
+#LOCAL_CFLAGS += -DOPENSSL_NO_ASM
+#endif
+#include $(LOCAL_PATH)/crypto-sources.mk
+#include $(BUILD_HOST_STATIC_LIBRARY)
 
 # Host shared library
-include $(CLEAR_VARS)
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libcrypto-host
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
-LOCAL_MULTILIB := both
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/crypto-sources.mk
-LOCAL_CFLAGS += -fvisibility=hidden -DBORINGSSL_SHARED_LIBRARY -DBORINGSSL_IMPLEMENTATION -Wno-unused-parameter
+#include $(CLEAR_VARS)
+#LOCAL_MODULE_TAGS := optional
+#LOCAL_MODULE := libcrypto-host
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
+#LOCAL_MULTILIB := both
+#LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/crypto-sources.mk
+#LOCAL_CFLAGS += -fvisibility=hidden -DBORINGSSL_SHARED_LIBRARY -DBORINGSSL_IMPLEMENTATION -Wno-unused-parameter
 # Windows and Macs both have problems with assembly files
-ifneq ($(HOST_OS),linux)
-LOCAL_CFLAGS += -DOPENSSL_NO_ASM
-endif
-include $(LOCAL_PATH)/crypto-sources.mk
-include $(BUILD_HOST_SHARED_LIBRARY)
+#ifneq ($(HOST_OS),linux)
+#LOCAL_CFLAGS += -DOPENSSL_NO_ASM
+#endif
+#include $(LOCAL_PATH)/crypto-sources.mk
+#include $(BUILD_HOST_SHARED_LIBRARY)
 
 
 ## libssl
@@ -91,7 +93,8 @@ include $(BUILD_HOST_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libssl_static
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/src/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/ssl-sources.mk
 LOCAL_SDK_VERSION := 9
 LOCAL_CFLAGS = -Wno-unused-parameter
@@ -102,7 +105,8 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libssl
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/src/include
 LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/ssl-sources.mk
 LOCAL_CFLAGS += -fvisibility=hidden -DBORINGSSL_SHARED_LIBRARY -DBORINGSSL_IMPLEMENTATION -Wno-unused-parameter
 LOCAL_SHARED_LIBRARIES=libcrypto
@@ -111,23 +115,23 @@ include $(LOCAL_PATH)/ssl-sources.mk
 include $(BUILD_SHARED_LIBRARY)
 
 # Host static library
-include $(CLEAR_VARS)
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libssl_static-host
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/ssl-sources.mk
-LOCAL_CFLAGS = -Wno-unused-parameter
-include $(LOCAL_PATH)/ssl-sources.mk
-include $(BUILD_HOST_STATIC_LIBRARY)
+#include $(CLEAR_VARS)
+#LOCAL_MODULE_TAGS := optional
+#LOCAL_MODULE := libssl_static-host
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+#LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/ssl-sources.mk
+#LOCAL_CFLAGS = -Wno-unused-parameter
+#include $(LOCAL_PATH)/ssl-sources.mk
+#include $(BUILD_HOST_STATIC_LIBRARY)
 
 # Host shared library
-include $(CLEAR_VARS)
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := libssl-host
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
-LOCAL_MULTILIB := both
-LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/ssl-sources.mk
-LOCAL_CFLAGS += -fvisibility=hidden -DBORINGSSL_SHARED_LIBRARY -DBORINGSSL_IMPLEMENTATION -Wno-unused-parameter
-LOCAL_SHARED_LIBRARIES += libcrypto-host
-include $(LOCAL_PATH)/ssl-sources.mk
-include $(BUILD_HOST_SHARED_LIBRARY)
+#include $(CLEAR_VARS)
+#LOCAL_MODULE_TAGS := optional
+#LOCAL_MODULE := libssl-host
+#LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/src/include
+#LOCAL_MULTILIB := both
+#LOCAL_ADDITIONAL_DEPENDENCIES := $(LOCAL_PATH)/Android.mk $(LOCAL_PATH)/ssl-sources.mk
+#LOCAL_CFLAGS += -fvisibility=hidden -DBORINGSSL_SHARED_LIBRARY -DBORINGSSL_IMPLEMENTATION -Wno-unused-parameter
+#LOCAL_SHARED_LIBRARIES += libcrypto-host
+#include $(LOCAL_PATH)/ssl-sources.mk
+#include $(BUILD_HOST_SHARED_LIBRARY)
